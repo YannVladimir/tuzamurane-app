@@ -1,72 +1,91 @@
-# Getting Started with Create React App
+# Tuzamurane App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A [Create React App](https://github.com/facebook/create-react-app)-based web
+front end. The project is currently at an early, scaffold stage: it has not
+yet been customized beyond the default CRA starter page, so there is no
+application-specific logic or routing in place yet.
 
-## Available Scripts
+## Tech stack
 
-In the project directory, you can run:
+- [React 18](https://react.dev/) (`react`, `react-dom`)
+- [Create React App](https://create-react-app.dev/) / `react-scripts` 5 for
+  the build tooling (Webpack, Babel, Jest, ESLint, all pre-configured)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+  and Jest for component tests
+- `web-vitals` for optional performance measurement reporting
 
-### `npm start`
+## Project structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+public/        Static HTML shell and PWA assets (favicon, manifest, icons)
+src/
+  App.js       Root component (currently the default CRA starter page)
+  App.test.js  Example test for the root component
+  index.js     React entry point / DOM mount
+  reportWebVitals.js  Optional performance metrics reporting hook
+  setupTests.js       Jest/jest-dom test setup
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Requirements
 
-### `npm test`
+- Node.js 18+ and npm (tested with Node 24 / npm 11)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting started
 
-### `npm run build`
+Install dependencies:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Run the app in development mode:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm start
+```
 
-### `npm run eject`
+Open [http://localhost:3000](http://localhost:3000) to view it in the
+browser. The page reloads automatically when you make changes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Running tests
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm test
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This launches Jest in interactive watch mode. In CI, tests are run
+non-interactively with `CI=true npm test -- --watchAll=false`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Building for production
 
-## Learn More
+```bash
+npm run build
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Builds a minified, production-ready bundle into the `build/` directory.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Continuous Integration
 
-### Code Splitting
+GitHub Actions (`.github/workflows/ci.yml`) installs dependencies, runs the
+test suite, and runs a production build on every push and pull request
+against `main`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Known limitations
 
-### Analyzing the Bundle Size
+- `react-scripts@5.0.1` (the current, final release of Create React App's
+  tooling) pulls in a number of outdated transitive dev-dependencies
+  (`webpack-dev-server`, `ws`, `websocket-driver`, `shell-quote`,
+  `form-data`, `proxy-addr`, etc.) that `npm audit` flags, some at
+  high/critical severity. These only affect the local dev server and test
+  runner — they are not included in the production `build/` bundle — and
+  there is currently no newer `react-scripts` release that resolves them,
+  since Create React App is no longer actively maintained. Migrating off
+  `react-scripts` (e.g. to [Vite](https://vitejs.dev/)) would be the proper
+  long-term fix and is tracked as follow-up work rather than done as part of
+  this cleanup.
+- The app itself has not yet been built out beyond the CRA starter page —
+  this repository is a starting point for the actual Tuzamurane application.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## License
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# tuzamurane-app" 
-"# tuzamurane-app" 
+[MIT](./LICENSE) (c) 2026 Yann Vladimir Bajeneza
